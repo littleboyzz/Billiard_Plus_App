@@ -125,7 +125,7 @@ export default function OrderDetail({ navigation, route }) {
 
       {/* Bottom Buttons */}
       <View style={styles.bottomButtons}>
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => {navigation.navigate('OrderScreen')}}>
           <Text style={styles.addButtonText}>● Thêm</Text>
         </TouchableOpacity>
 

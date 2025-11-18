@@ -37,9 +37,6 @@ export default function Menu({ visible, onClose, navigation }) {
               onPress={async () => {
                 if (item.route === "Logout") {
                   // 👉 Xử lý đăng xuất ở đây
-                  // Ví dụ xoá token và quay về màn Login
-                  // AsyncStorage.removeItem("token");
-
                   navigation.reset({
                     index: 0,
                     routes: [{ name: "LoginScreen" }],
