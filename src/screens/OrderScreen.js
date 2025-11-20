@@ -14,6 +14,30 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { getMenuCategories, getMenuItems } from '../services/productService';
 import { sessionService } from '../services/sessionService';
 import { Ionicons } from '@expo/vector-icons';
+import { CONFIG } from '../constants/config';
+
+// Hàm lấy URL hình ảnh sản phẩm
+const BASE_URL = CONFIG.baseURL.replace(/\/$/, ''); // bỏ dấu / cuối nếu có
+
+function getProductImageUrl(item) {
+  const images = item.images || [];
+  const imagePath =
+    Array.isArray(images) && images.length > 0 ? images[0] : null;
+
+  if (!imagePath) return null;
+  // Nếu backend đã trả full URL rồi thì dùng luôn
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+
+  // Nếu là path kiểu "/uploads/..." thì ghép với BASE_URL
+  if (imagePath.startsWith('/')) {
+    return `${BASE_URL}${imagePath}`;
+  }
+
+  // Nếu là "uploads/..." thì thêm dấu /
+  return `${BASE_URL}/${imagePath}`;
+}
 
 function getCategoryIcon(category, isActive) {
   const color = isActive ? '#1e293b' : '#1e293b';
