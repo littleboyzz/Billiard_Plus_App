@@ -12,12 +12,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 const menuItems = [
-  { id: 1, title: "Quản lý quán", icon: "restaurant", route: "Restaurant" },
+  { id: 1, title: "Quản lý câu lạc bộ", icon: "people", route: "Management" },
   { id: 2, title: "Quản lý hóa đơn", icon: "receipt", route: "Bills" },
-  { id: 3, title: "Hóa đơn điện tử", icon: "document-text", route: "EBills" },
-  { id: 4, title: "Quản lý thu chi", icon: "cash", route: "Finance" },
-  { id: 5, title: "Phiếu chi", icon: "document", route: "Expenses" },
-  { id: 6, title: "Công nợ khách hàng", icon: "people", route: "Debts" },
   { id: 7, title: "Thiết lập ", icon: "settings", route: "Settings" },
   { id: 8, title: "Đăng xuất", icon: "log-out", route: "Logout" },
 ];
