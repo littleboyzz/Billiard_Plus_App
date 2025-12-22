@@ -1,7 +1,7 @@
 // Full-bleed layout - Nâng cấp giao diện với Animation
 // NOTE: area đang bị comment trong route.params - cần fix sau
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Linking, StatusBar, Animated } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Linking, StatusBar, Animated, BackHandler, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -64,6 +64,29 @@ export default function PaymentSuccessScreen({ route, navigation }) {
       })
     ]).start();
   }, []);
+
+  // Block hardware back button on Android: navigate to TableListScreen (Main->Table)
+  useEffect(() => {
+    if (Platform.OS !== 'android') return;
+    const onBackPress = () => {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Main',
+            params: {
+              screen: 'Table',
+              params: { refreshData: true }
+            }
+          }
+        ]
+      });
+      return true; // indicate we've handled the back press
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => backHandler.remove();
+  }, [navigation]);
 
   const handleComplete = () => {
     if (shouldRefreshTables) {
